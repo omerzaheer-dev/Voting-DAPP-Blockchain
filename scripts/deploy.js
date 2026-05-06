@@ -1,11 +1,11 @@
-import hre from "hardhat";
-
+import { network } from "hardhat";
 
 async function main() {
-    const Create = await hre.ethers.getContractFactory("Create");
+    const { ethers } = await network.create();
+    const Create = await ethers.getContractFactory("Create");
     const create = await Create.deploy();
     await create.waitForDeployment();
-
+    console.log("Create deployed to:", await create.getAddress());
 }
 
 main().catch((error) => {
